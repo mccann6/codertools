@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import QRCode from 'qrcode';
 import { copyToClipboard } from '@/lib/utils';
 
 export default function QRGeneratorTool() {
@@ -10,23 +11,43 @@ export default function QRGeneratorTool() {
   const [size, setSize] = useState(256);
   const [errorLevel, setErrorLevel] = useState('M');
   const [copyStatus, setCopyStatus] = useState('');
+  const [autoGenerate, setAutoGenerate] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Simple QR Code generation using a public API
-  const generateQRCode = async () => {
+  // Client-side QR Code generation using qrcode library
+  const generateQRCode = useCallback(async () => {
     if (!text.trim()) {
       setQrCode('');
       return;
     }
 
     try {
-      // Using QR Server API for generating QR codes
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&ecc=${errorLevel}`;
-      setQrCode(qrUrl);
+      // Generate QR code as data URL using the qrcode library
+      const qrDataURL = await QRCode.toDataURL(text, {
+        width: size,
+        margin: 2,
+        errorCorrectionLevel: errorLevel as 'L' | 'M' | 'Q' | 'H',
+        color: {
+          dark: '#000000',  // Black dots
+          light: '#FFFFFF'  // White background
+        }
+      });
+      setQrCode(qrDataURL);
     } catch (error) {
       console.error('Error generating QR code:', error);
     }
-  };
+  }, [text, size, errorLevel]);
+
+  // Auto-generate QR code when text, size, or error level changes
+  useEffect(() => {
+    if (autoGenerate) {
+      const timeoutId = setTimeout(() => {
+        generateQRCode();
+      }, 300); // Debounce for 300ms
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [generateQRCode, autoGenerate]);
 
   const downloadQRCode = () => {
     if (!qrCode) return;
@@ -39,9 +60,34 @@ export default function QRGeneratorTool() {
     document.body.removeChild(link);
   };
 
-  const copyQRCodeURL = async () => {
-    const success = await copyToClipboard(qrCode);
-    setCopyStatus(success ? 'Copied!' : 'Failed to copy');
+  const copyQRCodeImage = async () => {
+    if (!qrCode) return;
+
+    try {
+      // Convert data URL to blob
+      const response = await fetch(qrCode);
+      const blob = await response.blob();
+      
+      // Copy to clipboard using Clipboard API
+      if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'image/png': blob
+          })
+        ]);
+        setCopyStatus('Image copied!');
+      } else {
+        // Fallback: copy the data URL as text
+        const success = await copyToClipboard(qrCode);
+        setCopyStatus(success ? 'Data URL copied!' : 'Failed to copy');
+      }
+    } catch (error) {
+      console.error('Error copying QR code:', error);
+      // Fallback: copy the data URL as text
+      const success = await copyToClipboard(qrCode);
+      setCopyStatus(success ? 'Data URL copied!' : 'Failed to copy');
+    }
+    
     setTimeout(() => setCopyStatus(''), 2000);
   };
 
@@ -54,9 +100,11 @@ export default function QRGeneratorTool() {
     { name: 'URL', value: 'https://example.com', description: 'Website URL' },
     { name: 'Email', value: 'mailto:contact@example.com', description: 'Email address' },
     { name: 'Phone', value: 'tel:+1234567890', description: 'Phone number' },
-    { name: 'SMS', value: 'sms:+1234567890', description: 'SMS message' },
+    { name: 'SMS', value: 'sms:+1234567890?body=Hello!', description: 'SMS message' },
     { name: 'WiFi', value: 'WIFI:T:WPA;S:NetworkName;P:Password;;', description: 'WiFi credentials' },
     { name: 'Location', value: 'geo:37.7749,-122.4194', description: 'GPS coordinates' },
+    { name: 'vCard', value: 'BEGIN:VCARD\nVERSION:3.0\nFN:John Doe\nORG:Company\nTEL:+1234567890\nEMAIL:john@example.com\nEND:VCARD', description: 'Contact card' },
+    { name: 'Event', value: 'BEGIN:VEVENT\nSUMMARY:Meeting\nDTSTART:20250101T100000\nDTEND:20250101T110000\nEND:VEVENT', description: 'Calendar event' },
   ];
 
   const loadTemplate = (template: string) => {
@@ -78,7 +126,7 @@ export default function QRGeneratorTool() {
       {/* Quick Templates */}
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Quick Templates</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
           {presetTemplates.map((template) => (
             <button
               key={template.name}
@@ -109,7 +157,7 @@ export default function QRGeneratorTool() {
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">QR Code Options</h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Size: {size}x{size} pixels
@@ -144,17 +192,36 @@ export default function QRGeneratorTool() {
               <option value="H">High (30%)</option>
             </select>
           </div>
+
+          <div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={autoGenerate}
+                onChange={(e) => setAutoGenerate(e.target.checked)}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Auto-generate
+              </span>
+            </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Generate QR code as you type
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Action Buttons */}
       <div className="flex space-x-3">
-        <button
-          onClick={generateQRCode}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-        >
-          Generate QR Code
-        </button>
+        {!autoGenerate && (
+          <button
+            onClick={generateQRCode}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            Generate QR Code
+          </button>
+        )}
         <button
           onClick={handleClear}
           className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium"
@@ -170,10 +237,10 @@ export default function QRGeneratorTool() {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Generated QR Code</h3>
             <div className="flex space-x-2">
               <button
-                onClick={copyQRCodeURL}
+                onClick={copyQRCodeImage}
                 className="px-3 py-1 text-sm bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
               >
-                {copyStatus || 'Copy URL'}
+                {copyStatus || 'Copy Image'}
               </button>
               <button
                 onClick={downloadQRCode}
@@ -208,6 +275,7 @@ export default function QRGeneratorTool() {
       <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
         <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">QR Code Information</h3>
         <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
+          <li>• QR codes are generated entirely in your browser for privacy and speed</li>
           <li>• QR codes can store text, URLs, contact info, WiFi credentials, and more</li>
           <li>• Higher error correction allows codes to work even when partially damaged</li>
           <li>• Larger sizes are better for printing and scanning from distance</li>

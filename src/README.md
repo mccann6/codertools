@@ -21,17 +21,20 @@ A comprehensive web application featuring 100+ developer tools including JSON fo
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd devtoolchest/src
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -56,6 +59,7 @@ src/
 ## Available Tools
 
 ### Text & Data Processing
+
 - JSON Formatter & Validator
 - Base64 Encoder/Decoder
 - CSV to JSON Converter
@@ -66,6 +70,7 @@ src/
 - Lorem Ipsum Generator
 
 ### Code & Development
+
 - CSS Formatter & Minifier
 - SQL Formatter
 - JWT Decoder
@@ -73,6 +78,7 @@ src/
 - Password Generator
 
 ### Utilities
+
 - QR Code Generator
 - Timestamp Converter
 - Color Converter
