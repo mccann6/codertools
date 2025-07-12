@@ -1,4 +1,4 @@
-# DevToolChest — Free Developer Tools Web App
+# CoderTools — Free Developer Tools Web App
 
 A comprehensive collection of 16+ free developer tools built with Next.js and Tailwind CSS.
 
@@ -9,7 +9,6 @@ A comprehensive collection of 16+ free developer tools built with Next.js and Ta
 - **Mobile Friendly**: Responsive design built with Tailwind CSS
 - **Dark/Light Theme**: Toggle between themes
 - **Ad Supported**: Minimal, non-intrusive advertising
-- **Privacy Focused**: Cookie-free analytics with Umami
 - **Fast & Lightweight**: Client-side processing, no backend required
 
 ## 🛠️ Tech Stack
@@ -17,7 +16,6 @@ A comprehensive collection of 16+ free developer tools built with Next.js and Ta
 - **Framework**: Next.js 15 with App Router
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
-- **Analytics**: Umami (self-hosted)
 - **Deployment**: Azure Container Apps
 
 ## 🏗️ Development
@@ -85,7 +83,6 @@ The application is designed to be deployed on Azure Container Apps with:
 - Automatic scaling
 - SSL certificates
 - Custom domains
-- Separate Umami analytics container
 
 ## 📄 License
 
