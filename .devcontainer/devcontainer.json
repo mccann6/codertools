@@ -1,0 +1,76 @@
+{
+  "name": "Next.js + Tailwind CSS Development",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "formulahendry.auto-rename-tag",
+        "ms-vscode.vscode-json",
+        "ms-vscode.vscode-eslint",
+        "usernamehw.errorlens",
+        "christian-kohler.path-intellisense",
+        "ms-vscode.vscode-thunder-client",
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-vscode.live-server",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "emmet.includeLanguages": {
+          "javascript": "javascriptreact",
+          "typescript": "typescriptreact"
+        },
+        "tailwindCSS.includeLanguages": {
+          "typescript": "javascript",
+          "typescriptreact": "javascript"
+        },
+        "tailwindCSS.experimental.classRegex": [
+          ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+        ]
+      }
+    }
+  },
+
+  "forwardPorts": [3000, 3001, 5173, 8080],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js Dev Server",
+      "onAutoForward": "notify"
+    },
+    "3001": {
+      "label": "Next.js Alternative Port",
+      "onAutoForward": "silent"
+    },
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "silent"
+    },
+    "8080": {
+      "label": "Preview Server",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "npm install -g pnpm yarn create-next-app@latest",
+  
+  "remoteUser": "node",
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/bashrc,target=/home/node/.bashrc,type=bind,consistency=cached"
+  ]
+}

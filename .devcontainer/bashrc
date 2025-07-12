@@ -1,0 +1,53 @@
+# Custom bashrc for Next.js + Tailwind CSS development
+
+# Enable color support
+export TERM=xterm-256color
+
+# Useful aliases for Next.js development
+alias npm-dev='npm run dev'
+alias npm-build='npm run build'
+alias npm-start='npm start'
+alias npm-test='npm test'
+alias npm-lint='npm run lint'
+
+# Yarn equivalents
+alias yarn-dev='yarn dev'
+alias yarn-build='yarn build' 
+alias yarn-start='yarn start'
+alias yarn-test='yarn test'
+alias yarn-lint='yarn lint'
+
+# pnpm equivalents  
+alias pnpm-dev='pnpm dev'
+alias pnpm-build='pnpm build'
+alias pnpm-start='pnpm start'
+alias pnpm-test='pnpm test'
+alias pnpm-lint='pnpm lint'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+
+# Directory navigation
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Node/npm shortcuts
+alias nv='node --version'
+alias npmv='npm --version'
+
+# Clear terminal
+alias c='clear'
+
+# Show current directory tree
+alias tree='find . -type d | head -20'
+
+# Welcome message
+echo "🚀 Next.js + Tailwind CSS Development Environment Ready!"
+echo "📦 Available package managers: npm, yarn, pnpm"
+echo "🛠️  Use aliases like 'npm-dev', 'yarn-dev', or 'pnpm-dev' to start development"
+echo ""
