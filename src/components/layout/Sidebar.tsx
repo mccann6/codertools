@@ -232,7 +232,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Footer */}
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-            <p>100+ Free Developer Tools</p>
+            <p>16+ Free Developer Tools</p>
             <p className="mt-1">No tracking • No registration required</p>
           </div>
         </div>

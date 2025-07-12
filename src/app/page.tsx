@@ -10,7 +10,7 @@ export default function Home() {
             Welcome to CoderTools
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-            Your collection of 100+ free developer tools, all running client-side for privacy and speed.
+            Your collection of 16+ free developer tools, all running client-side for privacy and speed.
           </p>
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
             <h2 className="text-lg font-semibold text-blue-900 dark:text-blue-300 mb-2">

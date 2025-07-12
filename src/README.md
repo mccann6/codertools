@@ -1,10 +1,10 @@
 # CoderTools
 
-A comprehensive web application featuring 100+ developer tools including JSON formatter, Base64 encoder, JWT decoder, and many more. Built with Next.js, TypeScript, and Tailwind CSS.
+A comprehensive web application featuring 16+ developer tools including JSON formatter, Base64 encoder, JWT decoder, and many more. Built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- **100+ Developer Tools**: JSON formatter, Base64 encoder/decoder, JWT decoder, UUID generator, password generator, QR code generator, and more
+- **16+ Developer Tools**: JSON formatter, Base64 encoder/decoder, JWT decoder, UUID generator, password generator, QR code generator, and more
 - **SEO Optimized**: Each tool has its own route with proper metadata
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
 - **Dark/Light Theme**: Toggle between themes with system preference detection
