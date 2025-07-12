@@ -35,10 +35,15 @@ Visit `http://localhost:3000` to see the application.
 
 ```
 src/
-├── src/app/                 # Next.js App Router
-├── src/components/          # Reusable components
-├── src/lib/                 # Utility functions
-└── public/                  # Static assets
+├── app/                     # Next.js App Router pages
+│   ├── layout.tsx          # Root layout
+│   ├── page.tsx            # Homepage
+│   └── tools/              # Individual tool pages
+├── components/             # Reusable components
+│   ├── layout/            # Layout components
+│   └── tools/             # Tool-specific components
+├── lib/                    # Utility functions
+└── public/                 # Static assets
 ```
 
 ## 🧪 Available Tools
