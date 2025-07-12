@@ -3,7 +3,7 @@ import JSONToCSVTool from '@/components/tools/JSONToCSVTool';
 import MainLayout from '@/components/layout/MainLayout';
 
 export const metadata: Metadata = {
-  title: 'JSON to CSV Converter | DevToolChest',
+  title: 'JSON to CSV Converter | CoderTools',
   description: 'Convert JSON data to CSV format. Handle nested objects, arrays, and customize output format for data processing.',
   keywords: ['json to csv', 'data converter', 'json converter', 'csv export', 'data transformation'],
 };

@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DevToolChest - Free Developer Tools",
+  title: "CoderTools - Free Developer Tools",
   description: "100+ free developer tools including JSON formatter, Base64 encoder, JWT decoder, UUID generator, and more. All tools work client-side for privacy and speed.",
   keywords: "developer tools, JSON formatter, Base64 encoder, JWT decoder, UUID generator, web development, programming tools",
-  authors: [{ name: "DevToolChest" }],
+  authors: [{ name: "CoderTools" }],
   openGraph: {
-    title: "DevToolChest - Free Developer Tools",
+    title: "CoderTools - Free Developer Tools",
     description: "100+ free developer tools for developers",
     type: "website",
   },

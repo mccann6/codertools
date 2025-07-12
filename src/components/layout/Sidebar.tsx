@@ -122,9 +122,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <div className="flex items-center justify-between mb-4">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">DT</span>
+                <span className="text-white font-bold text-sm">CT</span>
               </div>
-              <span className="font-bold text-xl text-gray-900 dark:text-white">DevToolChest</span>
+              <span className="font-bold text-xl text-gray-900 dark:text-white">CoderTools</span>
             </Link>
             <button
               onClick={onClose}

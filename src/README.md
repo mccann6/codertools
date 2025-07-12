@@ -1,4 +1,4 @@
-# DevToolChest
+# CoderTools
 
 A comprehensive web application featuring 100+ developer tools including JSON formatter, Base64 encoder, JWT decoder, and many more. Built with Next.js, TypeScript, and Tailwind CSS.
 
@@ -24,7 +24,7 @@ A comprehensive web application featuring 100+ developer tools including JSON fo
 
 ```bash
 git clone <repository-url>
-cd devtoolchest/src
+cd codertools/src
 ```
 
 2. Install dependencies:

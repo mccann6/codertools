@@ -3,7 +3,7 @@ import PasswordGeneratorTool from '@/components/tools/PasswordGeneratorTool';
 import MainLayout from '@/components/layout/MainLayout';
 
 export const metadata: Metadata = {
-  title: 'Password Generator | DevToolChest',
+  title: 'Password Generator | CoderTools',
   description: 'Generate secure, random passwords with customizable length and character sets. Create strong passwords for better security.',
   keywords: ['password generator', 'secure password', 'random password', 'password strength', 'security tools'],
 };

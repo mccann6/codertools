@@ -7,7 +7,7 @@ export default function Home() {
         {/* Welcome section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Welcome to DevToolChest
+            Welcome to CoderTools
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
             Your collection of 100+ free developer tools, all running client-side for privacy and speed.
