@@ -1,10 +1,10 @@
 # DevToolChest — Free Developer Tools Web App
 
-A comprehensive collection of 100+ free developer tools built with Next.js and Tailwind CSS.
+A comprehensive collection of 16+ free developer tools built with Next.js and Tailwind CSS.
 
 ## 🚀 Features
 
-- **100+ Developer Tools**: JSON formatter, Base64 encoder, JWT decoder, UUID generator, and many more
+- **16+ Developer Tools**: JSON formatter, Base64 encoder, JWT decoder, UUID generator, and many more
 - **SEO Optimized**: Each tool has its own route with proper meta tags
 - **Mobile Friendly**: Responsive design built with Tailwind CSS
 - **Dark/Light Theme**: Toggle between themes
